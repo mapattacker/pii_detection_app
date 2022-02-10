@@ -76,51 +76,31 @@ def comprehend_pii(concat_text, pii_list, threshold=0.7, len_pii=3,
 
 
 def report_phrasing(filename, pii_types, pii_list):
+    "generate content of each row of PII report dataframe"
+    
     contents = {"filename": filename}
-    if address in pii_types and pii_list:
-        contents[address] = 1
-    if age in pii_types and pii_list:
-        contents[age] = 1
-    if aws_access in pii_types and pii_list:
-        contents[aws_access] = 1
-    if aws_secret in pii_types and pii_list:
-        contents[aws_secret] = 1
-    if bank_acc in pii_types and pii_list:
-        contents[bank_acc] = 1
-    if bank_route in pii_types and pii_list:
-        contents[bank_route] = 1
-    if credit_cvv in pii_types and pii_list:
-        contents[credit_cvv] = 1
-    if credit_expiry in pii_types and pii_list:
-        contents[credit_expiry] = 1
-    if credit_no in pii_types and pii_list:
-        contents[credit_no] = 1
-    if date_time in pii_types and pii_list:
-        contents[date_time] = 1
-    if driver_id in pii_types and pii_list:
-        contents[driver_id] = 1
-    if email in pii_types and pii_list:
-        contents[email] = 1
-    if ip_add in pii_types and pii_list:
-        contents[ip_add] = 1
-    if mac_add in pii_types and pii_list:
-        contents[mac_add] = 1
-    if name in pii_types and pii_list:
-        contents[name] = 1
-    if passport in pii_types and pii_list:
-        contents[passport] = 1
-    if phone in pii_types and pii_list:
-        contents[phone] = 1
-    if pin in pii_types and pii_list:
-        contents[pin] = 1
-    if ssn in pii_types and pii_list:
-        contents[ssn] = 1
-    if url in pii_types and pii_list:
-        contents[url] = 1
-    if username in pii_types and pii_list:
-        contents[username] = 1
-    if password in pii_types and pii_list:
-        contents[password] = 1
+    if address in pii_types and pii_list: contents[address] = 1
+    if age in pii_types and pii_list: contents[age] = 1
+    if aws_access in pii_types and pii_list: contents[aws_access] = 1
+    if aws_secret in pii_types and pii_list: contents[aws_secret] = 1
+    if bank_acc in pii_types and pii_list: contents[bank_acc] = 1
+    if bank_route in pii_types and pii_list: contents[bank_route] = 1
+    if credit_cvv in pii_types and pii_list: contents[credit_cvv] = 1
+    if credit_expiry in pii_types and pii_list: contents[credit_expiry] = 1
+    if credit_no in pii_types and pii_list: contents[credit_no] = 1
+    if date_time in pii_types and pii_list: contents[date_time] = 1
+    if driver_id in pii_types and pii_list: contents[driver_id] = 1
+    if email in pii_types and pii_list: contents[email] = 1
+    if ip_add in pii_types and pii_list: contents[ip_add] = 1
+    if mac_add in pii_types and pii_list: contents[mac_add] = 1
+    if name in pii_types and pii_list: contents[name] = 1
+    if passport in pii_types and pii_list: contents[passport] = 1
+    if phone in pii_types and pii_list: contents[phone] = 1
+    if pin in pii_types and pii_list: contents[pin] = 1
+    if ssn in pii_types and pii_list: contents[ssn] = 1
+    if url in pii_types and pii_list: contents[url] = 1
+    if username in pii_types and pii_list: contents[username] = 1
+    if password in pii_types and pii_list: contents[password] = 1
     return contents
 
 
