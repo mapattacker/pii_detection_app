@@ -1,0 +1,4 @@
+boto3==1.18.64
+opencv_python==4.5.4.58
+pandas==1.0.1
+streamlit==1.5.1
