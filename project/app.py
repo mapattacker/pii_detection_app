@@ -1,4 +1,7 @@
+import os
+
 import streamlit as st
+from PIL import Image
 
 from image_pii import pipeline
 from pii_list import *
@@ -66,8 +69,15 @@ def main():
     if st.button("Start"):
         with st.spinner(text="Extracting PII..."):
             df = pipeline(input_folder, pii_checklist, output_image=False)
+            st.header("PII Report Summary")
             st.dataframe(df)
 
+    if st.button("Display images with PII"):
+        out_folder = "output"
+        for i in os.listdir(out_folder):
+            if i.endswith(("jpg", "jpeg", "png")):
+                image = Image.open(os.path.join(out_folder, i))
+                st.image(image, caption=i)
 
 if __name__ == "__main__":
     main()
