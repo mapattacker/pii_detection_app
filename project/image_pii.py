@@ -122,15 +122,18 @@ def pipeline(image_folder,
                 img_path = os.path.join(root, i)
                 with open(img_path, 'rb') as img:
                     img = bytearray(img.read())
+                    # textract
                     message, res = textract_output(img)
-                    pii_types, pii_txt = comprehend_pii(message, pii_list)
-                    coordinates_list = translate_pii_textract_coord(res, pii_txt)
+                    if len(message) > 0:
+                        # pii comprehend
+                        pii_types, pii_txt = comprehend_pii(message, pii_list)
 
-                    contents = report_phrasing(i, pii_types, pii_list)
-                    df = df.append(contents, ignore_index=True)
+                        contents = report_phrasing(i, pii_types, pii_list)
+                        df = df.append(contents, ignore_index=True)
 
-                    if output_image:
-                        label_image_pii(img_path, coordinates_list, pii_types)
+                        if output_image:
+                            coordinates_list = translate_pii_textract_coord(res, pii_txt)
+                            label_image_pii(img_path, coordinates_list, pii_types)
 
     if output_report:
         df.to_csv("pii_report.csv")
