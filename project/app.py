@@ -68,7 +68,7 @@ def main():
     pii_checklist = gen_pii_checklist()
     if st.button("Start"):
         with st.spinner(text="Extracting PII..."):
-            df = pipeline(input_folder, pii_checklist, output_image=False)
+            df = pipeline(input_folder, pii_checklist, output_image=True)
             st.header("PII Report Summary")
             st.dataframe(df)
 
