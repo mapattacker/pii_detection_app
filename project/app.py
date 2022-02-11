@@ -5,6 +5,7 @@ from PIL import Image
 
 from image_pii import pipeline
 from pii_list import *
+from utils import delete_all_images
 
 
 def gen_pii_checklist():
@@ -68,16 +69,20 @@ def main():
     pii_checklist = gen_pii_checklist()
     if st.button("Start"):
         with st.spinner(text="Extracting PII..."):
+            delete_all_images()
             df = pipeline(input_folder, pii_checklist, output_image=True)
             st.header("PII Report Summary")
             st.dataframe(df)
 
     if st.button("Display images with PII"):
         out_folder = "output"
+        img_list = []
         for i in os.listdir(out_folder):
             if i.endswith(("jpg", "jpeg", "png")):
                 image = Image.open(os.path.join(out_folder, i))
-                st.image(image, caption=i)
+                img_list.append(image)
+                
+        st.image(img_list, caption=img_list)
 
 if __name__ == "__main__":
     main()

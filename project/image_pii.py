@@ -3,7 +3,7 @@ import os
 import boto3
 import pandas as pd
 
-from util import label_image_pii
+from utils import label_image_pii
 from pii_list import *
 
 # boto3 clients
