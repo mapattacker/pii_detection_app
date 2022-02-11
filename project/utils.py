@@ -3,6 +3,13 @@ import os
 import cv2
 
 
+def delete_all_images(out_folder="output",format=("jpg", "jpeg", "png")):
+    for i in os.listdir(out_folder):
+        if i.endswith(format):
+            img_path = os.path.join(out_folder, i)
+            os.remove(img_path)
+
+
 def label_image_pii(image_path, coord_list, pii_types,
         output_folder="output",
         font_size=0.2):
