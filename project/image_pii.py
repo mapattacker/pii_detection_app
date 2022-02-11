@@ -11,14 +11,6 @@ textract = boto3.client('textract')
 comprehend = boto3.client('comprehend')
 
 
-# pii_list = [address, age, aws_access, aws_secret,
-#             bank_acc, bank_route, credit_cvv,
-#             credit_expiry, credit_no, date_time,
-#             driver_id, email, ip_add, mac_add,
-#             name, passport, password, phone,
-#             pin, ssn, url, username]
-
-
 def textract_output(image, delimiter="    "):
     """using AWS Textract, get text from images & concat them together"""
 
@@ -133,7 +125,8 @@ def pipeline(image_folder,
 
                         if output_image:
                             coordinates_list = translate_pii_textract_coord(res, pii_txt)
-                            label_image_pii(img_path, coordinates_list, pii_types)
+                            if len(coordinates_list) > 0:
+                                label_image_pii(img_path, coordinates_list, pii_types)
 
     if output_report:
         df.to_csv("pii_report.csv")
