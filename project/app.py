@@ -6,6 +6,7 @@ from PIL import Image
 from image_pii import pipeline
 from pii_list import *
 from utils import delete_all_images
+import SessionState
 
 
 def gen_pii_checklist():
@@ -67,6 +68,7 @@ def main():
     st.text("Detect if PII is present in images. Uses AWS Textract & Comprehend APIs")
     input_folder = st.text_input("folder path to images")
     pii_checklist = gen_pii_checklist()
+    
     if st.button("Start"):
         with st.spinner(text="Extracting PII..."):
             delete_all_images()
@@ -74,15 +76,21 @@ def main():
             st.header("PII Report Summary")
             st.dataframe(df)
 
+    # session state
+    # https://towardsdatascience.com/pagination-in-streamlit-82b62de9f62b
+    # https://discuss.streamlit.io/t/whats-the-recommended-way-to-paginate-content/112
     if st.button("Display images with PII"):
         out_folder = "output"
-        img_list = []
+        img_read_list = []
+        img_name_list = []
         for i in os.listdir(out_folder):
             if i.endswith(("jpg", "jpeg", "png")):
                 image = Image.open(os.path.join(out_folder, i))
-                img_list.append(image)
-                
-        st.image(img_list, caption=img_list)
+                img_read_list.append(image)
+                img_name_list.append(i)
+    
+        st.image(img_read_list, caption=img_name_list)
+
 
 if __name__ == "__main__":
     main()
